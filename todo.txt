@@ -1,3 +1,5 @@
+Work list:
+
 Main Menu         started
 Character Select  not started
 Level Select      not started
@@ -7,3 +9,8 @@ Player            not started
 Override Pause    not started
 
 There's plenty to do here...
+
+Notes:
+
+Tiled level editor looks AWESOME.  Definitely going to use that for the level editor.
+xSGE should be able to help with that.
