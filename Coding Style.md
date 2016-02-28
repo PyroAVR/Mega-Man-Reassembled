@@ -21,13 +21,13 @@ Not like this:
 if valid == True:
 ```
 
-While python is dynamically typed, it is also strongly typed, and, if variables are only used such that no conversions are necessary, and that types are not reassigned, processing time is saved during interpretation, speeding up execution considerably. See rpython project.
+While python is dynamically typed, it can also be strongly typed, and, if variables are only used such that no conversions are necessary, and that types are not reassigned, processing time is saved during interpretation, speeding up execution considerably. See rpython project.
 
 Typing recap:
 *Dynamic:* An object type can be changed within a given scope, therefore the following is valid:
 ```python
 a = 5
-a = '5'IS
+a = '5'
 ```
 *Static:* An object type cannot be changed without redefinition (in a different scope).  The following is therefore invalid:
 ```c++
