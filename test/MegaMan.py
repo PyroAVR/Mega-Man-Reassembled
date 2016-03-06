@@ -9,17 +9,17 @@ class Megaman(pygame.sprite.Sprite):
 ###VARIABLES SHARED BY ALL INSTANCES###
 
 #image path
-path = "insert path here"
+    path = "Animation/megaman1.png"
 #Example path = "/Mega-Man-Reassembled/assets/mmdance.gif"
 
 #make the sprite image
-image = pygame.image.load(path)
+    image = pygame.image.load(path)
 
 #if it's a .gif
-image = image.convert_alpha()
+    image = image.convert_alpha()
 
 #set start position
-startpos = (320,240) #start in the middle of the screen
+    startpos = (320,240) #start in the middle of the screen
 
 
     #initialize the sprite
@@ -35,7 +35,7 @@ startpos = (320,240) #start in the middle of the screen
 
 
     #update the sprite
-    def update(self, seconds)
+    def update(self, seconds):
 
         #add where sprite is drawn according the key presses, mouse movments, etc...
 
