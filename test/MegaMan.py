@@ -9,7 +9,7 @@ class Megaman(pygame.sprite.Sprite):
 ###VARIABLES SHARED BY ALL INSTANCES###
 
 #image path
-    path = "Animation/megaman1.png"
+    path = "Megaman/lib/megaman1.png"
 #Example path = "/Mega-Man-Reassembled/assets/mmdance.gif"
 
 #make the sprite image

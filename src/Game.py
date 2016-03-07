@@ -1,6 +1,10 @@
 import sge
 
 class Game(sge.dsp.Game):
+    #def __init__(self):
+        #super().__init__()
+        #self.pauseSprite = sge.gfx.Sprite(height=1080, width=1920)
+        #sge.game.mouse.visible = True;
     def event_key_press(self, key, char):
         if key == 'escape':
             self.event_close()

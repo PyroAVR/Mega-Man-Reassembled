@@ -6,12 +6,15 @@ import sge
 from Game import Game
 from Menu import Menu
 
-Game()
-background = sge.gfx.Background([], sge.gfx.Color("white"))
+game_width = 1920
+game_height = 1080
+
+Game(width= game_width, height= game_height)
 
 
 
-sge.game.start_room = Menu(background = background)
+
+sge.game.start_room = Menu()
 
 if __name__ == '__main__':
     sge.game.start()
