@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 #This is just to get us started, before we get structure worked out.
 import sge
-
 #This implementation detail frustrates programmers from low-level languages...
 from Game import Game
 from Menu import Menu
 
-game_width = 1920
-game_height = 1080
+#defaults
+game_width	=  1280
+game_height	=  720
 
 Game(width= game_width, height= game_height)
 
