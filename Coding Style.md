@@ -1,7 +1,16 @@
 **Why?**
 As a codebase grows, it becomes increasingly important to keep the code reasonable and readable.  This is mostly due to the increased difficulty of maintaining a large codebase.
 
-**Python**
+*variables, functions should use underscores, C-Style*
+```python
+pause_sprite = sge.game.Sprite(...)
+def start_loop(self, ...):
+```
+*class names, modules should use CamelCase, C++-Style*
+```python
+class DialogBox:
+```
+
 *Flow control should work like this:*
 ```python
 if condition:

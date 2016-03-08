@@ -15,7 +15,6 @@ Game(width= game_width, height= game_height)
 xsge_gui.init()
 
 
-
 sge.game.start_room = Menu()
 
 if __name__ == '__main__':
