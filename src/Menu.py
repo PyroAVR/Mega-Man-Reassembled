@@ -6,4 +6,4 @@ class Menu(sge.dsp.Room):
         font = sge.gfx.Font("assets/Fonts/PressStart2P.ttf",size=24)
         sge.game.project_text(font, "Megaman", sge.game.width/2, sge.game.height/4, color=sge.gfx.Color("blue"), halign="center", valign="middle")
         sge.game.project_text(font, "REASSEMBLED", sge.game.width/2, (sge.game.height/4)+100, color=sge.gfx.Color("red"), halign="center", valign="middle")
-        b = DialogBox(None, None, None)
+        testSprite = sge.gfx.Sprite(name="eddieclassic", directory="assets")

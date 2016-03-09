@@ -2,7 +2,7 @@ import sge
 import os
 
 class Game(sge.dsp.Game):
-    def __init__(self, height=1280, width=720):
+    def __init__(self, height=720, width=1280):
         super().__init__(width=width, height=height)
         self.pause_sprite = sge.gfx.Sprite(name='pause', directory="assets/pausemenu", height=1080, width=1920)
         sge.game.mouse.visible = True;
