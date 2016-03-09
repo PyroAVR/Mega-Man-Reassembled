@@ -4,6 +4,7 @@ Python 3 required.
 
 Dependencies:
 [Stellar Game Engine](http://stellarengine.nongnu.org)
+
 [xSGE](http://xsge.nongnu.org)
 
 
