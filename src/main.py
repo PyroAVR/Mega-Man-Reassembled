@@ -12,10 +12,14 @@ game_height	=  720
 
 Game(width= game_width, height= game_height)
 
+
+#Move this to the menu class
+background = sge.gfx.Background([], sge.gfx.Color("white"))
+
 xsge_gui.init()
 
 
-sge.game.start_room = Menu()
+sge.game.start_room = Menu(background=background)
 
 if __name__ == '__main__':
     sge.game.start()

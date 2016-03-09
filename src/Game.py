@@ -1,9 +1,10 @@
 import sge
+import os
 
 class Game(sge.dsp.Game):
     def __init__(self, height=1280, width=720):
         super().__init__(width=width, height=height)
-        self.pause_sprite = sge.gfx.Sprite(height=1080, width=1920)
+        self.pause_sprite = sge.gfx.Sprite(name='pause', directory="assets/pausemenu", height=1080, width=1920)
         sge.game.mouse.visible = True;
     def event_key_press(self, key, char):
         if key == 'escape':
@@ -13,7 +14,9 @@ class Game(sge.dsp.Game):
         elif key == 'f8':
             sge.gfx.Sprite.from_screenshot().save("screenshot.png")
         elif key == 'p':
-            self.pause(pause_sprite)
+            freezeframe = sge.gfx.Sprite.from_screenshot()
+            freezeframe.draw_sprite(self.pause_sprite, 0, 0, 0, 0)
+            self.pause(freezeframe)
 
     def event_close(self):
         self.end()

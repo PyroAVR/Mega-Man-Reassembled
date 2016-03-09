@@ -1,6 +1,6 @@
 import sge
 from DialogBox import DialogBox
-background = sge.gfx.Background([], sge.gfx.Color("white"))
+
 class Menu(sge.dsp.Room):
     def event_step(self, time_passed, delta_mult):
         font = sge.gfx.Font("assets/Fonts/PressStart2P.ttf",size=24)
