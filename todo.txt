@@ -14,3 +14,10 @@ Notes:
 
 Tiled level editor looks AWESOME.  Definitely going to use that for the level editor.
 xSGE should be able to help with that.
+Note to self: xSGE can't really help on the graphical end of things.
+
+"Rooms" need to have objects formed _outside_ of their scope and placed inside by
+the constructor, and, like magic, they will show up in the room.
+Things to do because of this:
+  - Room "generator": makes certain kinds of rooms, ie: Menu, level, etc.
+  - uhhhh
