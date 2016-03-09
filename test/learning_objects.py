@@ -30,18 +30,27 @@ class Game(sge.dsp.Game):
         self.event_close()
 
 
-Game()
 class TestObject(sge.dsp.Object):
     def __init__(self):
         x = 32
         y = 32
         sprite = sge.gfx.Sprite(name="eddieclassic", directory="assets/", width=32, height=32)
         super().__init__(x, y, sprite=sprite)
-    def event_step(self, time_passed, delta_mult):
-        print("Hello World!")
+#    def event_step(self, time_passed, delta_mult):
+#        print("Hello World!")
 
 
+class Generator:
+    def __init__(self, filename):
+        import json     #this screams bad practice to me
+        self.raw_data = ''
+        with open(filename, 'r') as file:   #with is one of Python's saving graces
+            self.raw_data = file.read()
+        self.json_obj = json.loads(self.raw_data)
+        print(self.json_obj["2"])
+Game()
 test = TestObject()
+g = Generator("test/test.json")
 objects = [test]
 background = sge.gfx.Background([], sge.gfx.Color("white"))
 sge.game.start_room = sge.dsp.Room(objects, background=background)
