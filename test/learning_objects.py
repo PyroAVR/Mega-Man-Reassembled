@@ -48,6 +48,7 @@ class Generator:
             self.raw_data = file.read()
         self.json_obj = json.loads(self.raw_data)
         print(self.json_obj["2"])
+    def get_obj
 Game()
 test = TestObject()
 g = Generator("test/test.json")
