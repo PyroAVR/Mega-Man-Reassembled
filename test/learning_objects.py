@@ -39,18 +39,54 @@ class TestObject(sge.dsp.Object):
 #    def event_step(self, time_passed, delta_mult):
 #        print("Hello World!")
 
+class CustomRoom(sge.dsp.Room):
+    def __init__(self):
+        print("placeholder")
+    
+
 
 class Generator:
     def __init__(self, filename):
         import json     #this screams bad practice to me
         self.raw_data = ''
+        #Python 3 apparently needs a max list size :/  What the heck, guys
+        self.objects = [1000]
         with open(filename, 'r') as file:   #with is one of Python's saving graces
             self.raw_data = file.read()
-        self.json_obj = json.loads(self.raw_data)
-        print(self.json_obj["2"])
+        self.json_data = json.loads(self.raw_data)
+        print(self.json_data)
+        #How many elements in the top-level array?
+        self.json_num_elements = len(self.json_data)
+        print(self.json_num_elements)
+
+    def createObjects(self):
+        i = 0
+        for obj in self.json_data:
+            #Do not read the last element.  That is the room descriptor.
+            if i == self.json_num_elements -1:
+                return
+            #so sad the one-liner had to go...
+            #how big is the path name?
+            sizeof_path = len(obj["sprite"])
+            sp_string = obj["sprite"]
+            #Where's the last '/' in the sprite field?
+            delim = sp_string.rfind("/") +1
+            sprite_path = sp_string[0:delim]
+            sprite_name = sp_string[delim:sizeof_path]
+            print(sprite_path)
+            print(sprite_name)
+            print(obj["x"])
+            s = sge.gfx.Sprite(name=sprite_name, directory=sprite_path, width=obj["width"], height=obj["height"])
+            self.objects[i] = sge.dsp.Object(obj["x"], obj["y"], z=obj["layer"])
+            i += 1
+    def loadRoom(self):
+        print("placeholder!")
+
 Game()
 test = TestObject()
 g = Generator("test/test.json")
+g.createObjects()
+g.loadRoom()
 objects = [test]
 background = sge.gfx.Background([], sge.gfx.Color("white"))
 sge.game.start_room = sge.dsp.Room(objects, background=background)
