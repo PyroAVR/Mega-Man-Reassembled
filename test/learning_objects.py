@@ -42,7 +42,7 @@ class TestObject(sge.dsp.Object):
 class CustomRoom(sge.dsp.Room):
     def __init__(self):
         print("placeholder")
-    
+
 
 
 class Generator:
@@ -82,6 +82,10 @@ class Generator:
     def loadRoom(self):
         print("placeholder!")
 
+        self.json_obj = json.loads(self.raw_data)
+        print(self.json_obj["2"])
+    def get_obj(self):
+        print("placeholder!")
 Game()
 test = TestObject()
 g = Generator("test/test.json")
