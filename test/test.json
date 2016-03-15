@@ -8,10 +8,15 @@
     "height" : 32
   },
   {
+    "name" : "lvlname",
     "background" : "assets/background",
     "width" : 1920,
     "height" : 1080,
-    "intromusic" : "assets/music/mmstart",
+    "relx" : 0,
+    "rely" : 0,
+    "xscroll" : 0,
+    "yscroll" : 0,
+    "intromusic" : "assets/music/mmstart.ogg",
     "intromovie" : "assets/level/intromovie",
     "music" : "assets/level/music"
   }

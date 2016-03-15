@@ -1,4 +1,5 @@
 import sge
+#import xsge_tmx
 import os
 
 class Game(sge.dsp.Game):
@@ -40,7 +41,19 @@ class TestObject(sge.dsp.Object):
 #        print("Hello World!")
 
 class CustomRoom(sge.dsp.Room):
-    def __init__(self):
+    def __init__(self, objects, intromusic, intromovie, music, background):
+        print("placeholder")
+        self.music = None
+        self.intromusic = intromusic
+        self.sounds = dict()
+        super().__init__(objects=objects, background=background)
+        self.start()
+
+    #We abstract the room start to it's own method so that it can restart itself.
+    def start(self):
+        print("placeholder")
+        self.intromusic.play()
+    def event_step(self, time_passed, delta_mult):
         print("placeholder")
 
 
@@ -79,22 +92,27 @@ class Generator:
             s = sge.gfx.Sprite(name=sprite_name, directory=sprite_path, width=obj["width"], height=obj["height"])
             self.objects[i] = sge.dsp.Object(obj["x"], obj["y"], z=obj["layer"])
             i += 1
+
+
     def loadRoom(self):
         print("placeholder!")
-
-        self.json_obj = json.loads(self.raw_data)
-        print(self.json_obj["2"])
-    def get_obj(self):
-        print("placeholder!")
+        rObj = self.json_data[len(self.json_data)-1]
+        self.intromusic = rObj["intromusic"]
+        self.intromovie = rObj["intromovie"]
+        #return sge.dsp.Room(objects=self.objects,
+        #The following doesn't work, although I wish it would.  Pending a re-write
+        #return CustomRoom(objects=self.objects,
+         #intromusic=sge.snd.Sound(intromusic), intromovie=intromovie, music=None, background=sge.gfx.Background([], sge.gfx.Color("black")))
 Game()
 test = TestObject()
 g = Generator("test/test.json")
 g.createObjects()
-g.loadRoom()
 objects = [test]
 background = sge.gfx.Background([], sge.gfx.Color("white"))
-sge.game.start_room = sge.dsp.Room(objects, background=background)
-
+#sge.game.start_room = sge.dsp.Room(objects=objects, background=background)
+#print(isinstance(g.loadRoom(), sge.dsp.Room))
+sge.game.start_room = g.loadRoom()
+print("Current Room: " + str(sge.game.start_room))
 
 if __name__ == '__main__':
     sge.game.start()
