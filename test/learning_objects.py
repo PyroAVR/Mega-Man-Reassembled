@@ -1,6 +1,7 @@
 import sge
 #import xsge_tmx
 import os
+from DialogBox import DialogBox
 
 class Game(sge.dsp.Game):
     def __init__(self, height=720, width=1280):
@@ -39,7 +40,7 @@ class TestObject(sge.dsp.Object):
         super().__init__(x, y, sprite=sprite)
 #    def event_step(self, time_passed, delta_mult):
 #        print("Hello World!")
-
+#This is deprecated.  Namely because it doesn't work.
 class CustomRoom(sge.dsp.Room):
     def __init__(self, objects, intromusic, intromovie, music, background):
         print("placeholder")
@@ -78,7 +79,12 @@ class Generator:
             #Do not read the last element.  That is the room descriptor.
             if i == self.json_num_elements -1:
                 return
-            #so sad the one-liner had to go...
+            if obj["type"] == "AIObject":
+                print("Type is Computer Player")
+            elif obj["type"] == "Player"
+                print("Type is Human Player.  Registering new player...")
+            elif obj["type"] == "DialogBox":
+                print("Type is DialogBox.  Registering new DialogBox id...")
             #how big is the path name?
             sizeof_path = len(obj["sprite"])
             sp_string = obj["sprite"]
@@ -109,10 +115,12 @@ g = Generator("test/test.json")
 g.createObjects()
 objects = [test]
 background = sge.gfx.Background([], sge.gfx.Color("white"))
-#sge.game.start_room = sge.dsp.Room(objects=objects, background=background)
+sge.game.start_room = sge.dsp.Room(objects=objects, background=background)
 #print(isinstance(g.loadRoom(), sge.dsp.Room))
-sge.game.start_room = g.loadRoom()
-print("Current Room: " + str(sge.game.start_room))
+#r = g.loadRoom()
+#print("r = " + str(r))
+#sge.game.start_room = r
+#print("Current Room: " + str(sge.game.start_room))
 
 if __name__ == '__main__':
     sge.game.start()

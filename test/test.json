@@ -1,11 +1,23 @@
 [
   {
+    "type": "AIObject",
     "x": 0,
     "y": 0,
     "layer" : 0,
     "sprite": "assets/eddieclassic",
     "width" : 32,
     "height" : 32
+  },
+  {
+  "type": "DialogBox",
+  "nframes": "2",
+  "text1" : "lorem ipsum dolor sit amet,",
+  "text2" : "consectetur adipiscing elit...",
+  "char1" : "assets/mmclassicface",
+  "char2" : "assets/zeroXface"
+  },
+  {
+    "type" : "Player"
   },
   {
     "name" : "lvlname",
