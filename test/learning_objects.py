@@ -92,9 +92,9 @@ class Generator:
             delim = sp_string.rfind("/") +1
             sprite_path = sp_string[0:delim]
             sprite_name = sp_string[delim:sizeof_path]
-            print(sprite_path)
-            print(sprite_name)
-            print(obj["x"])
+            #print(sprite_path)
+            #print(sprite_name)
+            #print(obj["x"])
             s = sge.gfx.Sprite(name=sprite_name, directory=sprite_path, width=obj["width"], height=obj["height"])
             self.objects[i] = sge.dsp.Object(obj["x"], obj["y"], z=obj["layer"])
             i += 1
@@ -121,6 +121,8 @@ sge.game.start_room = sge.dsp.Room(objects=objects, background=background)
 #print("r = " + str(r))
 #sge.game.start_room = r
 #print("Current Room: " + str(sge.game.start_room))
-
+#pls fix
+#d = DialogBox(null, font, )
+#sge.game.Game.project_sprite()
 if __name__ == '__main__':
     sge.game.start()
