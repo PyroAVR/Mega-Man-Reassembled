@@ -30,7 +30,7 @@ Currently, the Generator() class only supports the elements listed below.
   "char2" : "assets/zeroXface"
   },
   {
-    "background" : "assets/background",
+    "tmx" : "assets/lvl/lvl.tmx",
     "width" : 1920,
     "height" : 1080,
     "music" : "assets/lvlmusic"

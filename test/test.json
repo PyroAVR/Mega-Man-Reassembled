@@ -21,7 +21,7 @@
   },
   {
     "name" : "lvlname",
-    "background" : "assets/background",
+    "tmx" : "assets/lvl/lvl.tmx",
     "width" : 1920,
     "height" : 1080,
     "relx" : 0,

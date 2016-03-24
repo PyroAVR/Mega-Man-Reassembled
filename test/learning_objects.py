@@ -1,7 +1,8 @@
 import sge
-#import xsge_tmx
+import xsge_tmx as xtmx
 import os
 from DialogBox import DialogBox
+from room_extension import RoomB
 
 class Game(sge.dsp.Game):
     def __init__(self, height=720, width=1280):
@@ -40,9 +41,9 @@ class TestObject(sge.dsp.Object):
         super().__init__(x, y, sprite=sprite)
 #    def event_step(self, time_passed, delta_mult):
 #        print("Hello World!")
-#This is deprecated.  Namely because it doesn't work.
-class CustomRoom(sge.dsp.Room):
-    def __init__(self, objects, intromusic, intromovie, music, background):
+
+class RoomExtraManager:
+    def __init__(self, intromusic, intromovie, music):
         print("placeholder")
         self.music = None
         self.intromusic = intromusic
@@ -79,9 +80,10 @@ class Generator:
             #Do not read the last element.  That is the room descriptor.
             if i == self.json_num_elements -1:
                 return
+
             if obj["type"] == "AIObject":
                 print("Type is Computer Player")
-            elif obj["type"] == "Player"
+            elif obj["type"] == "Player":
                 print("Type is Human Player.  Registering new player...")
             elif obj["type"] == "DialogBox":
                 print("Type is DialogBox.  Registering new DialogBox id...")
@@ -103,23 +105,23 @@ class Generator:
     def loadRoom(self):
         print("placeholder!")
         rObj = self.json_data[len(self.json_data)-1]
+        self.Room = xtmx.load(rObj["tmx"])
         self.intromusic = rObj["intromusic"]
         self.intromovie = rObj["intromovie"]
-        #return sge.dsp.Room(objects=self.objects,
-        #The following doesn't work, although I wish it would.  Pending a re-write
-        #return CustomRoom(objects=self.objects,
-         #intromusic=sge.snd.Sound(intromusic), intromovie=intromovie, music=None, background=sge.gfx.Background([], sge.gfx.Color("black")))
+
+
 Game()
 test = TestObject()
 g = Generator("test/test.json")
-g.createObjects()
+#g.createObjects()
 objects = [test]
+r = RoomB()
 background = sge.gfx.Background([], sge.gfx.Color("white"))
-sge.game.start_room = sge.dsp.Room(objects=objects, background=background)
+#sge.game.start_room = sge.dsp.Room(objects=objects, background=background)
 #print(isinstance(g.loadRoom(), sge.dsp.Room))
 #r = g.loadRoom()
 #print("r = " + str(r))
-#sge.game.start_room = r
+sge.game.start_room = r
 #print("Current Room: " + str(sge.game.start_room))
 #pls fix
 #d = DialogBox(null, font, )
