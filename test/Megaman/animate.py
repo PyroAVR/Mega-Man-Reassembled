@@ -138,9 +138,11 @@ def main():
     #counter = 0
 
     #blaster stuff
-    blastNumber = 0
+    #blastNumber = 0
+
     isBlasting = False
     blastCount = 0
+    blast_list = []
 
 
     while True:
@@ -175,7 +177,9 @@ def main():
 
                if ourevent.key == pygame.K_d:
 
-                   blaster1 = Blaster(sprite.x + 20, sprite.y + 20, 'right')
+                   #blaster1 = Blaster(sprite.x + 20, sprite.y + 20, 'right')
+
+                   blast_list.append(Blaster(sprite.x + 20, sprite.y + 20, 'right'))
                    isBlasting = True
 
                    #if blastNumber == 0:
@@ -228,12 +232,17 @@ def main():
 
 
         if isBlasting == True and sprite.isJump == False:
-            #print "blast"
 
             if blastCount < 200:
+
                 blastCount = blastCount + 1
-                blaster1.moveRight()
-                blaster1.render()
+
+                for blaster in blast_list:
+                    blaster.moveRight()
+                    blaster.render()
+
+                #blaster1.moveRight()
+                #blaster1.render()
 
                 #if blastNumber == 0:
                 #    blastCount = blastCount + 1
