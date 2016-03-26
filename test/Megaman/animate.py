@@ -76,37 +76,46 @@ class Player(pygame.sprite.Sprite):
 
 
 
-class Blaster(object):
+class Blaster(pygame.sprite.Sprite):
 
     def __init__(self, xpos, ypos, direction):
 
-        self.image = load('blast.png')
+        self.image = load('lib/blast.png')
 
-        self.speed = 5
+        self.speed = 10
 
         self.x = xpos
         self.y = ypos
 
         if direction == 'right':
-            self.moveRight
+            self.moveRight()
         elif direction == 'left':
-            self.moveLeft
+            self.moveLeft()
         else:
             print "you forgot a contructor idiot"
 
 
     def moveRight(self):
 
-        for i in range (0, 20):
-            self.x = self.x =+ self.speed
-            self.render()
+        #for i in range (0, 20):
+            #self.x = self.x =+ self.speed
+            #print "moving right"
+            #self.render()
+            #time.sleep(1)
+
+            #if i > 20:
+                #return
+
+        self.x = self.x + self.speed
+        #self.render()
 
 
     def moveLeft(self):
 
         for i in range (0, 20):
-            self.x = self.x =- self.speed
+            self.x = self.x - self.speed
             self.render()
+            time.sleep(.1)
 
 
     def render(self):
@@ -127,6 +136,11 @@ def main():
     bkgd = pygame.image.load('lib/bkgd.jpg')
 
     #counter = 0
+
+    #blaster stuff
+    blastNumber = 0
+    isBlasting = False
+    blastCount = 0
 
 
     while True:
@@ -152,15 +166,35 @@ def main():
                if ourevent.key == pygame.K_UP:
                    sprite.animate_jump()
                    sprite.y -= 20
-                   #sprite.isJump = False
+                   sprite.isJump = True
 
                if ourevent.key == pygame.K_DOWN:
                    sprite.animate_jump()
                    sprite.y += 20
-                   #sprite.isJump = False
+                   sprite.isJump = True
 
                if ourevent.key == pygame.K_d:
-                   blaster = Blaster(sprite.x, sprite.y, 'right')
+
+                   blaster1 = Blaster(sprite.x + 20, sprite.y + 20, 'right')
+                   isBlasting = True
+
+                   #if blastNumber == 0:
+                    #   print 'ay'
+                     #  blaster1 = Blaster(sprite.x + 20, sprite.y + 20, 'right') #add or subtract to sprite location later for starting point of blaster
+                      # blastNumber = blastNumber + 1
+
+                  #elif blastNumber == 1:
+                    #   blaster2 = Blaster(sprite.x + 20, sprite.y + 20, 'right')
+                     #  blastNumber = blastNumber + 1
+
+                   #elif blastNumber == 2:
+                    #   blaster3 = Blaster(sprite.x + 20, sprite.y + 20, 'right')
+                     #  blastNumber = blastNumber + 1
+
+                   #elif blastNumber == 3:
+                    #   blaster4 = Blaster(sprite.x + 20, sprite.y + 20, 'right')
+                     #  blastNumber = blastNumber + 1
+
 
 
         leftPressed = False
@@ -191,6 +225,41 @@ def main():
 
         sprite.update()
         sprite.render()
+
+
+        if isBlasting == True and sprite.isJump == False:
+            #print "blast"
+
+            if blastCount < 200:
+                blastCount = blastCount + 1
+                blaster1.moveRight()
+                blaster1.render()
+
+                #if blastNumber == 0:
+                #    blastCount = blastCount + 1
+                #    blaster1.moveRight()
+                #    blaster1.render()
+
+                    #if blastNumber == 1:
+                    #    blaster2.moveRight()
+                    #    blaster2.render()
+
+                    #    if blastNumber == 2:
+                    #        blaster3.moveRight()
+                    #        blaster3.render()
+
+                    #        if blastNumber == 3:
+                    #            blaster4.moveRight()
+                    #            blaster4.render()
+
+            else:
+                isBlasting = False
+                blastCount = 0
+
+
+
+        #print blastNumber
+
         pygame.display.flip()
 
 
