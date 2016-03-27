@@ -22,3 +22,7 @@ Things to do because of this:
   - Room "generator": makes certain kinds of rooms, ie: Menu, level, etc.
   - uhhhh
   -text font element to room generator/etc.
+
+Fun fact: Module import can be done via a string, which would potentially allow
+a level to be loaded from the JSON file, given that a .py file is linked...
+This leads to many custom levels, full overloading, etc.  Sounds amazing for fan-levels.
