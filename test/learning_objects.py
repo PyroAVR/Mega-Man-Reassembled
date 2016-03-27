@@ -41,22 +41,18 @@ class TestObject(sge.dsp.Object):
         super().__init__(x, y, sprite=sprite)
 #    def event_step(self, time_passed, delta_mult):
 #        print("Hello World!")
-
-class RoomExtraManager:
-    def __init__(self, intromusic, intromovie, music):
-        print("placeholder")
-        self.music = None
+#please rename this
+class ExtendedRoom(sge.dsp.Room):
+    #using this instead of overloading __init__
+    #load objects outside of this, this should be fast, does not load automatically.
+    def setup_custom_objects(self, intromusic=None, intromovie=None, music=None):
         self.intromusic = intromusic
-        self.sounds = dict()
-        super().__init__(objects=objects, background=background)
-        self.start()
+        self.intromovie = intromovie
+        self.music = music
 
-    #We abstract the room start to it's own method so that it can restart itself.
-    def start(self):
+    def event_room_start(self):
         print("placeholder")
         self.intromusic.play()
-    def event_step(self, time_passed, delta_mult):
-        print("placeholder")
 
 
 
@@ -74,7 +70,7 @@ class Generator:
         self.json_num_elements = len(self.json_data)
         print(self.json_num_elements)
 
-    def createObjects(self):
+    def loadObjects(self):
         i = 0
         for obj in self.json_data:
             #Do not read the last element.  That is the room descriptor.
@@ -105,26 +101,24 @@ class Generator:
     def loadRoom(self):
         print("placeholder!")
         rObj = self.json_data[len(self.json_data)-1]
-        self.Room = xtmx.load(rObj["tmx"])
-        self.intromusic = rObj["intromusic"]
-        self.intromovie = rObj["intromovie"]
+        self.Room = xtmx.load(rObj["tmx"], cls=ExtendedRoom)
+        #Eventually, intromovie/music will be supported.
+        self.Room.setup_custom_objects(intromusic=sge.snd.Music(rObj["intro_music"]), music=sge.snd.Music(rObj["music"]))
+        return self.Room
 
 
 Game()
 test = TestObject()
 g = Generator("test/test.json")
-#g.createObjects()
 objects = [test]
 r = RoomB()
 background = sge.gfx.Background([], sge.gfx.Color("white"))
 #sge.game.start_room = sge.dsp.Room(objects=objects, background=background)
 #print(isinstance(g.loadRoom(), sge.dsp.Room))
-#r = g.loadRoom()
+r = g.loadRoom()
 #print("r = " + str(r))
 sge.game.start_room = r
+#sge.game.start_room = xtmx.load("assets/lvl.tmx", cls=ExtendedRoom)
 #print("Current Room: " + str(sge.game.start_room))
-#pls fix
-#d = DialogBox(null, font, )
-#sge.game.Game.project_sprite()
 if __name__ == '__main__':
     sge.game.start()

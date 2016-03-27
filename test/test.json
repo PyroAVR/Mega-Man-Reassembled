@@ -21,15 +21,12 @@
   },
   {
     "name" : "lvlname",
-    "tmx" : "assets/lvl/lvl.tmx",
-    "width" : 1920,
-    "height" : 1080,
+    "tmx" : "assets/lvl.tmx",
     "relx" : 0,
     "rely" : 0,
     "xscroll" : 0,
     "yscroll" : 0,
-    "intromusic" : "assets/music/mmstart.ogg",
-    "intromovie" : "assets/level/intromovie",
-    "music" : "assets/level/music"
+    "intro_music" : "assets/music/mmstart.ogg",
+    "music" : "assets/music/mmstart.ogg"
   }
 ]
