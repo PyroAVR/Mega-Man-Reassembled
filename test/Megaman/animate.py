@@ -3,6 +3,7 @@
 import sys
 import time
 import pygame
+import sound
 
 
 #set width and height variables
@@ -10,8 +11,8 @@ global width, height
 width = 1000
 height = 640
 
-#loading images
 
+#loading images
 def load(imgpath):
     img = pygame.image.load(imgpath)
     return img
@@ -24,6 +25,8 @@ class Player(pygame.sprite.Sprite):
         self.speed = 20
 
         self.isJump = False
+        self.gravity = 1
+        self.yvel = 0
 
         self.x = xpos
         self.y = ypos
@@ -65,6 +68,29 @@ class Player(pygame.sprite.Sprite):
         #self.isJump = True
 
 
+    def jump(self, velocity):
+
+        self.yvel = -velocity
+        self.isJump = True
+
+
+    def update_jump(self):
+
+        self.yvel += self.gravity
+        self.y += self.yvel
+
+        if self.y > 510:
+            #self.y = 500
+            self.isJump = False
+            self.yvel = 0
+
+
+    def fall(self):
+
+        if self.y < 500 and self.isJump == False:
+            self.jump(-25)
+
+
     def update(self):
         #put jump and run physics here
         return
@@ -82,10 +108,11 @@ class Blaster(pygame.sprite.Sprite):
 
         self.image = load('lib/blast.png')
 
-        self.speed = 10
+        self.speed = 5
 
         self.x = xpos
         self.y = ypos
+
 
         if direction == 'right':
             self.moveRight()
@@ -97,25 +124,17 @@ class Blaster(pygame.sprite.Sprite):
 
     def moveRight(self):
 
-        #for i in range (0, 20):
-            #self.x = self.x =+ self.speed
-            #print "moving right"
-            #self.render()
-            #time.sleep(1)
-
-            #if i > 20:
-                #return
-
         self.x = self.x + self.speed
-        #self.render()
 
 
     def moveLeft(self):
 
-        for i in range (0, 20):
-            self.x = self.x - self.speed
-            self.render()
-            time.sleep(.1)
+        #for i in range (0, 20):
+            #self.x = self.x - self.speed
+            #self.render()
+            #time.sleep(.1)
+
+        self.x = self.x - self.speed
 
 
     def render(self):
@@ -137,12 +156,9 @@ def main():
 
     #counter = 0
 
-    #blaster stuff
-    #blastNumber = 0
-
+    blast_list = [] #make a globals in own class later
     isBlasting = False
-    blastCount = 0
-    blast_list = []
+
 
 
     while True:
@@ -167,18 +183,20 @@ def main():
            if ourevent.type == pygame.KEYDOWN:
                if ourevent.key == pygame.K_UP:
                    sprite.animate_jump()
-                   sprite.y -= 20
-                   sprite.isJump = True
+                   sprite.jump(12)
+                   #sprite.y -= 20
+                   #sprite.isJump = True
 
-               if ourevent.key == pygame.K_DOWN:
-                   sprite.animate_jump()
-                   sprite.y += 20
-                   sprite.isJump = True
+               #if ourevent.key == pygame.K_DOWN:
+                   #sprite.animate_jump()
+                   #sprite.jump(-12)
+                   #sprite.y += 20
+                   #sprite.isJump = True
 
                if ourevent.key == pygame.K_d:
 
                    #blaster1 = Blaster(sprite.x + 20, sprite.y + 20, 'right')
-
+                   sound.pew()
                    blast_list.append(Blaster(sprite.x + 20, sprite.y + 20, 'right'))
                    isBlasting = True
 
@@ -212,7 +230,7 @@ def main():
                 sprite.isJump = False
                 sprite.animate_right()
                 sprite.x = sprite.x + sprite.speed
-                time.sleep(.04)
+                time.sleep(.04) #sleep is adding delay to blaster
 
         if keys[pygame.K_LEFT]:
             if rightPressed == False: #and sprite.isJump == False:
@@ -220,7 +238,7 @@ def main():
                 sprite.isJump = False
                 sprite.animate_standing()
                 sprite.x = sprite.x - sprite.speed
-                time.sleep(.04)
+                time.sleep(.04) #sleep is adding delay to blaster
 
 
         #if leftPressed == False and rightPressed == False: #and sprite.isJump == False:
@@ -230,44 +248,30 @@ def main():
         sprite.update()
         sprite.render()
 
+        sprite.fall()
 
-        if isBlasting == True and sprite.isJump == False:
+        #if isBlasting == True and sprite.isJump == False:
 
-            if blastCount < 200:
+        #if isBlasting == True:
 
-                blastCount = blastCount + 1
+        for blaster in blast_list:
+            blaster.moveRight()
+            blaster.render()
 
-                for blaster in blast_list:
-                    blaster.moveRight()
-                    blaster.render()
+            if blaster.x > 1000:
+                blast_list.remove(blaster)
 
-                #blaster1.moveRight()
-                #blaster1.render()
-
-                #if blastNumber == 0:
-                #    blastCount = blastCount + 1
-                #    blaster1.moveRight()
-                #    blaster1.render()
-
-                    #if blastNumber == 1:
-                    #    blaster2.moveRight()
-                    #    blaster2.render()
-
-                    #    if blastNumber == 2:
-                    #        blaster3.moveRight()
-                    #        blaster3.render()
-
-                    #        if blastNumber == 3:
-                    #            blaster4.moveRight()
-                    #            blaster4.render()
-
-            else:
-                isBlasting = False
-                blastCount = 0
+            #else:
+                #isBlasting = False
+                #blastCount = 0
 
 
+        if sprite.isJump == False and rightPressed == False and leftPressed == False:
+            sprite.animate_standing()
 
-        #print blastNumber
+
+        if sprite.isJump == True:
+            sprite.update_jump()
 
         pygame.display.flip()
 
