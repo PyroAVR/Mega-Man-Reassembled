@@ -74,6 +74,18 @@ class Player(pygame.sprite.Sprite):
         self.isJump = True
 
 
+    def animate_blast(self, direction):
+
+        if direction == 'right':
+            self.image = load('lib/megaman_blast_right.png')
+
+        if direction == 'left':
+            self.image = load('lib/megaman_blast_left.png')
+
+        else:
+            print 'you screwed up'
+
+
     def update_jump(self):
 
         self.yvel += self.gravity
