@@ -120,7 +120,7 @@ class Player(pygame.sprite.Sprite):
 
         else:
             #nothing collided
-            break
+            return
 
 
     def render(self):
@@ -226,7 +226,7 @@ def main():
                    sound.pew()
                    blast_list.append(Blaster(sprite.x + 20, sprite.y + 20, 'right'))
                    isBlasting = True
-                   sprite.animate_blast("right")
+                   #sprite.animate_blast("right")
 
                    #if blastNumber == 0:
                     #   print 'ay'
@@ -253,20 +253,22 @@ def main():
 
         keys = pygame.key.get_pressed()  #checking pressed keys
         if keys[pygame.K_RIGHT]:
-            if leftPressed == False: #and sprite.isJump == False:
-                rightPressed = True
-                sprite.isJump = False
-                sprite.animate_right()
-                sprite.x = sprite.x + sprite.speed
-                time.sleep(.04) #sleep is adding delay to blaster
+            if sprite.x <= width -  60:
+                if leftPressed == False: #and sprite.isJump == False:
+                    rightPressed = True
+                    sprite.isJump = False
+                    sprite.animate_right()
+                    sprite.x = sprite.x + sprite.speed
+                    time.sleep(.04) #sleep is adding delay to blaster
 
         if keys[pygame.K_LEFT]:
             if rightPressed == False: #and sprite.isJump == False:
-                leftPressed = True
-                sprite.isJump = False
-                sprite.animate_standing()
-                sprite.x = sprite.x - sprite.speed
-                time.sleep(.04) #sleep is adding delay to blaster
+                if sprite.x >= 0:
+                    leftPressed = True
+                    sprite.isJump = False
+                    sprite.animate_standing()
+                    sprite.x = sprite.x - sprite.speed
+                    time.sleep(.04) #sleep is adding delay to blaster
 
 
         #if leftPressed == False and rightPressed == False: #and sprite.isJump == False:
