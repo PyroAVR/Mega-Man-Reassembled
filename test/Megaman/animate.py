@@ -170,6 +170,48 @@ class Blaster(pygame.sprite.Sprite):
 
 
 
+
+class Enemy(pygame.sprite.Sprite):
+
+    def __init__(self, xpos, ypos, health, damage):
+
+        self.x = xpos
+        self.y = ypos
+
+        self.health = health
+        self.damage = damage
+
+
+    def render(image):
+
+        screen.blit(image, (self.x, self.y))
+
+
+
+#class Juan(Enemy):
+
+class Baddy(pygame.sprite.Sprite):
+
+    def __init__(self, xpos, ypos):
+
+        #super((Enemy, self), __init__())
+
+        self.x = xpos
+        self.y = ypos
+
+        self.health = 10
+        self.damage = 10
+
+        self.image = load('lib\john.png')
+
+
+    def render(self):
+
+        screen.blit(self.image, (self.x, self.y))
+
+
+
+
 def main():
 
     pygame.init()
