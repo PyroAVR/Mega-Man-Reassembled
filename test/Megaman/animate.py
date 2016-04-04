@@ -115,7 +115,7 @@ class Player(pygame.sprite.Sprite):
 
         objectPoint = (object.x, object.y)
 
-        if self.rect.collidepoint(objectpoint) == True:
+        if self.rect.collidepoint(objectPoint) == True:
             self.health -= object.damage
 
         else:
@@ -202,7 +202,10 @@ class Baddy(pygame.sprite.Sprite):
         self.health = 10
         self.damage = 10
 
-        self.image = load('lib\john.png')
+        self.image = load('lib\john.jpg')
+
+        self.rect = pygame.Rect(5, 5, 120, 120)
+
 
 
     def render(self):
@@ -223,9 +226,11 @@ def main():
 
     bkgd = pygame.image.load('lib/bkgd.jpg')
 
+    #enemy = Baddy(400, 500)
+
     #counter = 0
 
-    blast_list = [] #make a globals in own class later
+    blast_list = [] #make a global in own class later
     isBlasting = False
 
 
@@ -322,6 +327,8 @@ def main():
 
         sprite.fall()
 
+        enemy.render()
+
         #if isBlasting == True and sprite.isJump == False:
 
         #if isBlasting == True:
@@ -344,6 +351,12 @@ def main():
 
         if sprite.isJump == True:
             sprite.update_jump()
+
+
+        #sprite.check_collision(enemy)
+
+        if sprite.health <= 0:
+            sys.exit()
 
         pygame.display.flip()
 
