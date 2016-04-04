@@ -327,7 +327,7 @@ def main():
 
         sprite.fall()
 
-        enemy.render()
+        #enemy.render()
 
         #if isBlasting == True and sprite.isJump == False:
 
