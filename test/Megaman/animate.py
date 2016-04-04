@@ -22,6 +22,9 @@ class Player(pygame.sprite.Sprite):
 
     def __init__(self, xpos, ypos):
 
+        self.healthModifier = 0 #change for powerups and items
+        self.health = 10 + self.healthModifier
+
         self.speed = 20
 
         self.isJump = False
@@ -39,7 +42,7 @@ class Player(pygame.sprite.Sprite):
 
         self.index = 0
         self.image = self.right_images[self.index]
-        self.rect = pygame.Rect(5, 5, 60, 60) #images are 60 x 60 pixels
+        self.rect = pygame.Rect(5, 5, 60, 60) #images are 60 x 60 pixels ##fix this later for collision## ###needs to move with the sprite###
 
 
     def set_position(self, xpos, ypos):
@@ -106,6 +109,18 @@ class Player(pygame.sprite.Sprite):
     def update(self):
         #put jump and run physics here
         return
+
+
+    def check_collision(self, object):
+
+        objectPoint = (object.x, object.y)
+
+        if self.rect.collidepoint(objectpoint) == True:
+            self.health -= object.damage
+
+        else:
+            #nothing collided
+            break
 
 
     def render(self):
