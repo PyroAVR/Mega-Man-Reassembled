@@ -211,6 +211,7 @@ def main():
                    sound.pew()
                    blast_list.append(Blaster(sprite.x + 20, sprite.y + 20, 'right'))
                    isBlasting = True
+                   sprite.animate_blast("right")
 
                    #if blastNumber == 0:
                     #   print 'ay'
