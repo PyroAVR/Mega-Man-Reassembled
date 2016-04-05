@@ -42,7 +42,7 @@ class Player(pygame.sprite.Sprite):
 
         self.index = 0
         self.image = self.right_images[self.index]
-        self.rect = pygame.Rect(5, 5, 60, 60) #images are 60 x 60 pixels ##fix this later for collision## ###needs to move with the sprite###
+        self.rect = pygame.Rect(self.x, self.y, 60, 60) #images are 60 x 60 pixels ##fix this later for collision## ###needs to move with the sprite###
 
 
     def set_position(self, xpos, ypos):
@@ -116,12 +116,15 @@ class Player(pygame.sprite.Sprite):
 
     def check_collision(self, object):
 
+        self.rect = pygame.Rect(self.x, self.y, 120, 120)
         objectPoint = (object.x, object.y)
 
         if self.rect.collidepoint(objectPoint) == True:
+            print "collision!"
             self.health -= object.damage
 
         else:
+            #print "nope"
             #nothing collided
             return
 
@@ -205,9 +208,9 @@ class Baddy(pygame.sprite.Sprite):
         self.health = 10
         self.damage = 10
 
-        self.image = load('lib\john.jpg')
+        self.image = load('lib/megaman1.png')
 
-        self.rect = pygame.Rect(5, 5, 120, 120)
+        self.rect = pygame.Rect(self.x, self.y, 60, 60)
 
 
 
@@ -229,7 +232,7 @@ def main():
 
     bkgd = pygame.image.load('lib/bkgd.jpg')
 
-    #enemy = Baddy(400, 500)
+    enemy = Baddy(400, 200)
 
     #counter = 0
 
@@ -330,7 +333,7 @@ def main():
 
         sprite.fall()
 
-        #enemy.render()
+        enemy.render()
 
         #if isBlasting == True and sprite.isJump == False:
 
@@ -356,7 +359,7 @@ def main():
             sprite.update_jump()
 
 
-        #sprite.check_collision(enemy)
+        sprite.check_collision(enemy)
 
         if sprite.health <= 0:
             sys.exit()
