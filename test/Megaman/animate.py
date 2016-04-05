@@ -79,12 +79,15 @@ class Player(pygame.sprite.Sprite):
 
     def animate_blast(self, direction):
 
+        rightBlast = load('lib/megaman_blast_right.png')
+        leftBlast = load('lib/megaman_blast_left.png')
+
+
         if direction == 'right':
-            self.image = load('lib/megaman_blast_right.png')
+            self.image = rightBlast
 
         if direction == 'left':
-            self.image = load('lib/megaman_blast_left.png')
-
+            self.image = leftBlast
         else:
             print 'you screwed up'
 
