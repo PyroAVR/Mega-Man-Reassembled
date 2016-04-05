@@ -114,9 +114,20 @@ class Player(pygame.sprite.Sprite):
         return
 
 
+    def update_rect(self, newx, newy):
+
+        x = newx
+        y = newy
+
+        self.rect = pygame.Rect(x, y, 120, 120)
+
+
+
     def check_collision(self, object):
 
-        self.rect = pygame.Rect(self.x, self.y, 120, 120)
+        #self.rect = pygame.Rect(self.x, self.y, 120, 120)
+        update_rect(self.x, self.y)
+
         objectPoint = (object.x, object.y)
 
         if self.rect.collidepoint(objectPoint) == True:
@@ -210,7 +221,7 @@ class Baddy(pygame.sprite.Sprite):
 
         self.image = load('lib/megaman1.png')
 
-        self.rect = pygame.Rect(self.x, self.y, 60, 60)
+        self.rect = pygame.Rect(self.x, self.y, 60, 60) #broken
 
 
 
@@ -232,7 +243,7 @@ def main():
 
     bkgd = pygame.image.load('lib/bkgd.jpg')
 
-    enemy = Baddy(400, 200)
+    enemy = Baddy(400, 500)
 
     #counter = 0
 
