@@ -202,8 +202,8 @@ class Enemy(pygame.sprite.Sprite):
         self.x = xpos
         self.y = ypos
 
-        self.health = health
         self.damage = damage
+        self.health = health
 
 
     def render(image):
@@ -362,6 +362,12 @@ def main():
 
 
         #time.sleep(0.1)
+
+
+
+def initialize():
+    #put crap here
+    return
 
 
 def update_player():
