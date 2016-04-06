@@ -238,6 +238,37 @@ class Baddy(pygame.sprite.Sprite):
 
 
 
+class loseScreen(object):
+
+    def __init__(self, xpos, ypos):
+
+        self.x = xpos
+        self.y = ypos
+
+        self.images = []
+        self.images.append(load('lib/you_lose/you_lose-0.png'))
+        self.images.append(load('lib/you_lose/you_lose-1.png'))
+        self.images.append(load('lib/you_lose/you_lose-2.png'))
+        self.images.append(load('lib/you_lose/you_lose-3.png'))
+        self.images.append(load('lib/you_lose/you_lose-4.png'))
+
+        self.index = 0
+
+    def animate(self):
+
+        self.index += 1
+        if self.index >= len(self.images):
+            self.index = 0
+        self.image = self.images[self.index]
+
+        time.sleep(0.04)
+
+
+    def render(self):
+
+        screen.blit(self.image, (self.x, self.y))
+
+
 
 def main():
 
@@ -252,6 +283,7 @@ def main():
 
     bkgd = pygame.image.load('lib/bkgd.jpg')
 
+    ls = loseScreen(width/2, height/2)
 
     #counter = 0
 
@@ -354,9 +386,44 @@ def main():
                 #blastCount = 0
 
 
-        update_player()
-        update_blaster()
-        update_enemy()
+        #update_player()
+        #update_blaster()
+        #update_enemy()
+
+        #update player stuffs
+        sprite.update()
+        sprite.render()
+
+        sprite.fall()
+
+
+        if sprite.isJump == False and rightPressed == False and leftPressed == False:
+            sprite.animate_standing()
+
+
+        if sprite.isJump == True:
+            sprite.update_jump()
+
+
+        if sprite.health <= 0:
+            #sys.exit()
+            ls.animate()
+            ls.render()
+
+
+        #update blaster stuffs
+        for blaster in blast_list:
+            blaster.moveRight()
+            blaster.render()
+
+            if blaster.x > 1000:
+                blast_list.remove(blaster)
+
+
+        #update enemy stuffs
+        enemy.render()
+
+
 
         pygame.display.flip()
 
@@ -387,7 +454,9 @@ def update_player():
 
 
     if sprite.health <= 0:
-        sys.exit()
+        #sys.exit()
+        ls.animate()
+        ls.render()
 
 
 
