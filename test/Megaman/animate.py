@@ -126,7 +126,7 @@ class Player(pygame.sprite.Sprite):
     def check_collision(self, object):
 
         #self.rect = pygame.Rect(self.x, self.y, 120, 120)
-        update_rect(self.x, self.y)
+        self.update_rect(self.x, self.y)
 
         objectPoint = (object.x, object.y)
 
@@ -147,6 +147,13 @@ class Player(pygame.sprite.Sprite):
 
 
 class Blaster(pygame.sprite.Sprite):
+
+    global blast_list
+    global isBlasting
+
+    blast_list = [] #make a global in own class later
+    isBlasting = False
+
 
     def __init__(self, xpos, ypos, direction):
 
@@ -240,20 +247,18 @@ def main():
     screen = pygame.display.set_mode((width, height))
 
     sprite = Player(100,500)
+    enemy = Baddy(400, 500)
+
 
     bkgd = pygame.image.load('lib/bkgd.jpg')
 
-    enemy = Baddy(400, 500)
 
     #counter = 0
-
-    blast_list = [] #make a global in own class later
-    isBlasting = False
-
 
 
     while True:
 
+        sprite.check_collision(enemy)
 
         #counter += 1
         #print counter
@@ -270,6 +275,7 @@ def main():
            if ourevent.type == pygame.QUIT:
                pygame.quit()
                sys.exit(0)
+
 
            if ourevent.type == pygame.KEYDOWN:
                if ourevent.key == pygame.K_UP:
@@ -311,9 +317,9 @@ def main():
 
 
 
+
         leftPressed = False
         rightPressed = False
-
 
         keys = pygame.key.get_pressed()  #checking pressed keys
         if keys[pygame.K_RIGHT]:
@@ -333,7 +339,6 @@ def main():
                     sprite.animate_standing()
                     sprite.x = sprite.x - sprite.speed
                     time.sleep(.04) #sleep is adding delay to blaster
-
 
         #if leftPressed == False and rightPressed == False: #and sprite.isJump == False:
             #sprite.animate_standing()
@@ -369,8 +374,6 @@ def main():
         if sprite.isJump == True:
             sprite.update_jump()
 
-
-        sprite.check_collision(enemy)
 
         if sprite.health <= 0:
             sys.exit()
