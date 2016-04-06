@@ -258,7 +258,7 @@ def main():
 
     while True:
 
-        sprite.check_collision(enemy)
+        sprite.check_collision(enemy) #check first
 
         #counter += 1
         #print counter
@@ -344,44 +344,62 @@ def main():
             #sprite.animate_standing()
 
 
-        sprite.update()
-        sprite.render()
-
-        sprite.fall()
-
-        enemy.render()
 
         #if isBlasting == True and sprite.isJump == False:
 
         #if isBlasting == True:
-
-        for blaster in blast_list:
-            blaster.moveRight()
-            blaster.render()
-
-            if blaster.x > 1000:
-                blast_list.remove(blaster)
 
             #else:
                 #isBlasting = False
                 #blastCount = 0
 
 
-        if sprite.isJump == False and rightPressed == False and leftPressed == False:
-            sprite.animate_standing()
-
-
-        if sprite.isJump == True:
-            sprite.update_jump()
-
-
-        if sprite.health <= 0:
-            sys.exit()
+        update_player()
+        update_blaster()
+        update_enemy()
 
         pygame.display.flip()
 
 
         #time.sleep(0.1)
+
+
+def update_player():
+
+    sprite.update()
+    sprite.render()
+
+    sprite.fall()
+
+
+    if sprite.isJump == False and rightPressed == False and leftPressed == False:
+        sprite.animate_standing()
+
+
+    if sprite.isJump == True:
+        sprite.update_jump()
+
+
+    if sprite.health <= 0:
+        sys.exit()
+
+
+
+def update_blaster():
+
+    for blaster in blast_list:
+        blaster.moveRight()
+        blaster.render()
+
+    if blaster.x > 1000:
+        blast_list.remove(blaster)
+
+
+
+def update_enemy():
+
+    enemy.render()
+
 
 
 
