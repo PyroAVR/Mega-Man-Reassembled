@@ -140,6 +140,11 @@ class Player(pygame.sprite.Sprite):
             return
 
 
+    def stop(self):
+
+        self.speed = 0
+
+
     def render(self):
 
         screen.blit(self.image, (self.x, self.y))
@@ -410,6 +415,8 @@ def main():
             ls.animate()
             ls.render()
 
+            sprite.stop()
+
 
         #update blaster stuffs
         for blaster in blast_list:
@@ -422,7 +429,6 @@ def main():
 
         #update enemy stuffs
         enemy.render()
-
 
 
         pygame.display.flip()
